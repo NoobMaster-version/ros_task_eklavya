@@ -34,39 +34,39 @@ Your task is to **complete the ROS 2 package** so that:
 
 ---
 
-## Your Tasks
+## Solution Overview
 
-### 1. `src/fk_task.py`
+### 1. `src/fk_task.py` Implementation
 
-- The file is provided as a skeleton with comments.
-- **You must implement a ROS 2 node** that:
-  - Reads joint angles and gripper commands from `angles.txt`.
-  - Publishes the corresponding joint positions to the `/forward_position_controller/commands` topic at a fixed interval (e.g., every 2 seconds).
-  - Computes and prints the end-effector position using the DH parameters and displays on terminal.
-  -(optional) Store the values of final end-effector position in a file.
+The node has been implemented with the following features:
+- Reads joint angles and gripper commands from `angles.txt` using ROS 2 package share directory
+- Publishes joint positions to `/forward_position_controller/commands` topic with a 1-second interval
+- Implements forward kinematics using DH parameters to compute end-effector position
+- Prints end-effector positions to terminal in X,Y,Z format
+- Stores end-effector positions in `ros_task/end_effector.txt`
+- Handles error cases and invalid angles gracefully
 
-### 2. `launch/display.launch.py`
+### 2. `launch/display.launch.py` Implementation
 
-- The file is partially complete.
-- **You must fill in the missing code** to:
-  - Set up the environment for Ignition Gazebo.
-  - Launch Ignition Gazebo with an empty world.
-  - Include the robot spawn launch file.
-  - Ensure the robot is spawned and controllers are started.
+The launch file has been completed with:
+- Environment setup for Ignition Gazebo with proper resource paths
+- Launch configuration for empty world in Ignition Gazebo
+- Integration with robot spawn launch file
+- Proper package and resource management
 
 ### 3. `spawn_robot.launch.py`
 
-- Provided for reference. You do **not** need to modify this file.
+- Remained unchanged as per requirements
 
 ---
 
-## Submission Checklist
+## Implementation Status
 
-- [ ] `src/fk_task.py` is implemented and works as described.
-- [ ] `launch/display.launch.py` is complete and launches the simulation as described.
-- [ ] You have to launch the simulation, and the robot moves according to `angles.txt`.
-- [ ] You have recorded a video showing both the terminals and gazebo when the nodes are running.
-- [ ] Copy the final end-effector position in a file which we get as a result of running the fk_task.py node.
+- [x] `src/fk_task.py` is fully implemented and functional
+- [x] `launch/display.launch.py` is complete and launches the simulation successfully
+- [x] Robot simulation moves according to angles from `angles.txt`
+- [x] End-effector positions are computed and stored in `ros_task/end_effector.txt`
+- [x] Video demonstration available at: https://youtu.be/jxuYggvI_8k
 
 ---
 ## Installation
@@ -83,7 +83,7 @@ colcon build
 
 ---
 
-## Getting Started
+## Running the Solution
 
 1. Build the package:
     ```
@@ -94,13 +94,24 @@ colcon build
     ```
     ros2 launch ros_task_eklavya display.launch.py
     ```
-3. In a new terminal, run your node:
+3. In a new terminal, run the forward kinematics node:
     ```
     ros2 run ros_task_eklavya fk_task.py
     ```
-4. Copy the values of final end-effector position in a file which we get as a result of running the fk_task.py node.
 
-5. Record the video of in which both the terminals and gazebo are seen and upload it to the provided link.
+The node will:
+- Read joint angles from `angles.txt`
+- Move the robot through the specified positions
+- Print end-effector positions to terminal
+- Store positions in `ros_task/end_effector.txt`
+- Control the gripper state based on input commands
+
+4. Record a video showing both terminals and Gazebo simulation for submission
+
+### Solution Video Demo
+Click the thumbnail below to watch the solution demonstration:
+
+[![Watch the solution demo](https://img.youtube.com/vi/jxuYggvI_8k/0.jpg)](https://youtu.be/jxuYggvI_8k)
 
 ---
 

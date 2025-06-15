@@ -32,6 +32,10 @@ install(
   DIRECTORY config launch meshes src urdf ros_task
   DESTINATION share/${PROJECT_NAME}
 )
+install(
+  FILES ros_task/angles.txt
+  DESTINATION share/${PROJECT_NAME}
+)
 
 if(BUILD_TESTING)
     find_package(ament_lint_auto REQUIRED)

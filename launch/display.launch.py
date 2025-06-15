@@ -21,18 +21,25 @@ def generate_launch_description():
         os.environ['IGN_GAZEBO_RESOURCE_PATH'] = install_dir + '/share' + ':' + gazebo_models_path
 
 
-     # TODO : Launch Ignition Gazebo
-     # ign_gazebo = IncludeLaunchDescription(....
+     # Launch Ignition Gazebo
+    ign_gazebo = IncludeLaunchDescription(
+        PythonLaunchDescriptionSource(
+            os.path.join(pkg_ign_gazebo, 'launch', 'ign_gazebo.launch.py'),
+        ),
+        launch_arguments={'ign_args': '-r empty.sdf'}.items()
+    )
 
-
-
-     # TODO: Launch spawn_robot.launch,py
-     # spawn_bot = IncludeLaunchDescription( ....
+     # Include spawn launch
+    spawn_bot = IncludeLaunchDescription(
+        PythonLaunchDescriptionSource(
+            os.path.join(pkg_eklavya_bot, 'launch', 'spawn_robot.launch.py'),
+        )
+    )
 
 
     return LaunchDescription([
-        # ign_gazebo,
-        # spawn_bot
+        ign_gazebo,
+        spawn_bot
     ])
 
 
